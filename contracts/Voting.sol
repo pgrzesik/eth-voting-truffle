@@ -15,8 +15,11 @@ contract Voting {
     uint public balanceTokens;
     uint public tokenPrice;
 
-    function Voting(bytes32[] candidateNames) {
-        candidateList = candidateNames;
+    function Voting(uint _totalTokens, uint _tokenPrice, bytes32[] _candidateList) {
+        candidateList = _candidateList;
+        totalTokens = _totalTokens;
+        balanceTokens = _totalTokens;
+        tokenPrice = _tokenPrice;
     }
 
     function totalVotesFor(bytes32 candidate) returns (uint8) {
