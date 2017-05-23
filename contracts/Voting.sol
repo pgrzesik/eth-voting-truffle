@@ -22,6 +22,17 @@ contract Voting {
         tokenPrice = _tokenPrice;
     }
 
+    function buy() payable returns (uint) {
+        uint tokensToBuy = msg.value / tokenPrice;
+        if (tokensToBuy > balanceTokens) {
+            throw;
+        }
+        voterInfo[msg.sender].voterAddress = msg.sender;
+        voterInfo[msg.sender].tokensBought += tokensToBuy;
+        balanceTokens -= tokensToBuy;
+        return tokensToBuy;
+    }
+
     function totalVotesFor(bytes32 candidate) returns (uint8) {
         if (validCandidate(candidate) == false) {
             throw;
