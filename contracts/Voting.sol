@@ -1,8 +1,19 @@
 pragma solidity ^0.4.6;
 
 contract Voting {
+    struct voter {
+        address voterAddress;
+        uint tokensBought;
+        uint[] tokensUsedPerCandidate;
+    }
+
     mapping (bytes32 => uint8) public votesReceived;
+    mapping (address => voter) public voterInfo;
+
     bytes32[] public candidateList;
+    uint public totalTokens;
+    uint public balanceTokens;
+    uint public tokenPrice;
 
     function Voting(bytes32[] candidateNames) {
         candidateList = candidateNames;
